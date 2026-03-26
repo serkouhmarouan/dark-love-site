@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dark Love Test 🎸❤️</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(-45deg, #000, #1a0000, #000);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+    color: #ff004c;
+    font-family: 'Courier New', monospace;
+    text-align: center;
+    padding: 20px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.music-controls {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 2000;
+    background: rgba(17, 17, 17, 0.95);
+    backdrop-filter: blur(10px);
+    border: 2px solid crimson;
+    border-radius: 50px;
+    padding: 10px 15px;
+    box-shadow: 0 0 20px red;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+
+.music-btn {
+    background: none;
+    border: none;
+    color: #ff69b4;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.music-btn:hover {
+    background: rgba(255,0,76,0.2);
+    transform: scale(1.1);
+}
+
+#volumeSlider {
+    width: 80px;
+    height: 4px;
+    background: rgba(255,0,76,0.3);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+#volumeSlider::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: crimson;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px red;
+}
+
+h1 {
+    color: crimson;
+    text-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 30px;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red; }
+    to { text-shadow: 0 0 20px red, 0 0 30px red, 0 0 40px red, 0 0 50px red; }
+}
+
+.box {
+    background: rgba(17, 17, 17, 0.95);
+    backdrop-filter: blur(10px);
+    border: 2px solid crimson;
+    padding: 30px;
+    margin: 20px auto;
+    width: min(90%, 400px);
+    box-shadow: 0 0 20px red, inset 0 0 20px rgba(255,0,76,0.1);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px red;
+}
+
+p {
+    margin: 20px 0 10px 0;
+    font-size: 1.1rem;
+}
+
+input {
+    width: 90%;
+    padding: 12px;
+    margin: 5px auto;
+    background: rgba(0,0,0,0.8);
+    color: #ff69b4;
+    border: 2px solid #ff004c;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: crimson;
+    box-shadow: 0 0 15px crimson, 0 0 25px rgba(255,0,76,0.5);
+    transform: scale(1.02);
+}
+
+button {
+    padding: 15px 30px;
+    background: linear-gradient(45deg, crimson, #ff1493);
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-family: inherit;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 25px;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+button:hover {
+    background: linear-gradient(45deg, red, crimson);
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px red;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+#secret {
+    display: none;
+    margin-top: 40px;
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    color: #ff69b4;
+    text-shadow: 0 0 15px red;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+    padding: 30px;
+    background: rgba(0,0,0,0.8);
+    border: 2px solid pink;
+    border-radius: 15px;
+    box-shadow: 0 0 30px pink;
+    animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+    from { 
+        opacity: 0; 
+        transform: translateY(50px) scale(0.9); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+@keyframes float {
+    to { 
+        transform: translateY(-120vh) rotate(720deg); 
+        opacity: 0; 
+    }
+}
+
+.particle {
+    position: fixed;
+    color: rgba(255,0,76,0.6);
+    font-size: 20px;
+    pointer-events: none;
+    z-index: 1000;
+    animation: float 4s linear forwards;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    body { padding: 10px; }
+    .box { padding: 20px; }
+    .music-controls { 
+        top: 10px; 
+        right: 10px; 
+        left: 10px; 
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+</style>
+
+</head>
+<body>
+
+<!-- 🎵 Music Controls -->
+<div class="music-controls">
+    <button class="music-btn" id="playBtn" onclick="toggleMusic()" title="Play/Pause">▶️</button>
+    <span style="color: #ff69b4; font-weight: bold;">Our Song</span>
+    <input type="range" id="volumeSlider" min="0" max="100" value="50" title="Volume">
+</div>
+
+<!-- Hidden audio player -->
+<audio id="loveSong" loop preload="auto">
+    <!-- Replace with your song URL or upload to hosting -->
+    <!-- Free romantic options: -->
+    <!-- 1. https://www.soundjay.com/misc/sounds/romantic-piano-1.mp3 -->
+    <!-- 2. https://freesound.org/data/previews/171/171104_2435688-lq.mp3 -->
+    <!-- 3. Upload your special song to GitHub/Dropbox/etc. -->
+    
+    <!-- Example placeholder (replace with real URL): -->
+    <source src="https://www.soundjay.com/misc/sounds/romantic-piano-1.mp3" type="audio/mpeg">
+    <source src="https://freesound.org/data/previews/171/171104_2435688-lq.mp3" type="audio/mpeg">
+    Your browser doesn't support audio 😢
+</audio>
+
+<h1>Dark Love Test 🎸❤️</h1>
+
+<div class="box" id="testBox">
+<p>1 - will you let me be with you in the hard times</p>
+<input id="q1" type="text" placeholder="Type your answer...">
+
+<p>2 - will you stay with me in the hard times</p>
+<input id="q2" type="text" placeholder="Type your answer...">
+
+<p>3 - will you be my wife forever ♾️</p>
+<input id="q3" type="text" placeholder="Type your answer...">
+
+<button onclick="check()">Unlock My Heart 💔➡️❤️</button>
+</div>
+
+<div id="secret">
+CHOUROUK… u are the center of my whole life….  <br><br>
+Im gonna live the rest of my life trying to be the man u deserve  <br>
+and i can't see any future to myself without you in it  <br>
+so it's either u or nothing…  <br><br>
+i love you with every inch of my existence  <br>
+and i know you do too  <br>
+and also…  <br>
+we do love each other the same…  <br>
+but me more 🫠❤️
+</div>
+
+<script>
+const audio = document.getElementById('loveSong');
+const playBtn = document.getElementById('playBtn');
+const volumeSlider = document.getElementById('volumeSlider');
+
+// 🎵 Music Controls
+function toggleMusic() {
+    if (audio.paused) {
+        audio.play().catch(e => {
+            console.log('Autoplay blocked, click play button');
+        });
+        playBtn.textContent = '⏸️';
+        playBtn.title = 'Pause';
+    } else {
+        audio.pause();
+        playBtn.textContent = '▶️';
+        playBtn.title = 'Play';
+    }
+}
+
+volumeSlider.addEventListener('input', function() {
+    audio.volume = this.value / 100;
+});
+
+audio.addEventListener('play', () => {
+    playBtn.textContent = '⏸️';
+});
+audio.addEventListener('pause', () => {
+    playBtn.textContent = '▶️';
+});
+
+// Auto-play on first interaction (respects browser policies)
+document.addEventListener('click', function firstClick() {
+    if (audio.paused) {
+        audio.volume = 0.3; // Gentle start
+        audio.play().catch(() => {}); // Silent fail
+    }
+    document.removeEventListener('click', firstClick);
+}, { once: true });
+
+function createHearts() {
+    for(let i = 0; i < 25; i++) {
+        setTimeout(() => {
+            let heart = document.createElement('div');
+            heart.innerHTML = ['❤️', '💖', '💕', '💗', '🖤'][Math.floor(Math.random() * 5)];
+            heart.className = 'particle';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '90vh';
+            heart.style.fontSize = (15 + Math.random() * 15) + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }, i * 120);
+    }
+}
+
+function check() {
+    let a1 = document.getElementById("q1").value.trim().toLowerCase();
+    let a2 = document.getElementById("q2").value.trim().toLowerCase();
+    let a3 = document.getElementById("q3").value.trim().toLowerCase();
+
+    const yesMatches = ["yes", "y", "yeah", "yep", "of course", "yes i will", "i will", "always", "forever"];
+    
+    if (yesMatches.some(match => a1.includes(match)) && 
+        yesMatches.some(match => a2.includes(match)) && 
+        yesMatches.some(match => a3.includes(match))) {
+        
+        // 🎵 BLAST THE MUSIC ON SUCCESS!
+        audio.volume = 0.6;
+        if (audio.paused) audio.play();
+        
+        document.getElementById("secret").style.display = "block";
+        document.getElementById("testBox").style.display = "none";
+        createHearts();
+        
+        // Guitar emojis
+        for(let i = 0; i < 10; i++) {
+            setTimeout(() => {
+                let note = document.createElement('div');
+                note.innerHTML = '🎸';
+                note.className = 'particle';
+                note.style.left = Math.random() * 100 + 'vw';
+                note.style.top = '80vh';
+                note.style.fontSize = '25px';
+                document.body.appendChild(note);
+                setTimeout(() => note.remove(), 4000);
+            }, i * 200);
+        }
+        
+    } else {
+        const box = document.getElementById("testBox");
+        box.style.animation = "shake 0.6s ease-in-out";
+        setTimeout(() => {
+            box.style.animation = "";
+        }, 600);
+        setTimeout(() => {
+            alert("❌ Wrong answers... love test failed 💔\nTry again with all your heart! 💕");
+        }, 300);
+    }
+}
+
+// Enter key support
+document.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter' && !document.getElementById("secret").style.display) {
+        check();
+    }
+});
+
+// Ambient sparkles
+setInterval(() => {
+    if (Math.random() < 0.3) {
+        let sparkle = document.createElement('div');
+        sparkle.innerHTML = '✨';
+        sparkle.style.position = 'fixed';
+        sparkle.style.left = Math.random() * 100 + 'vw';
+        sparkle.style.top = Math.random() * 100 + 'vh';
+        sparkle.style.fontSize = '12px';
+        sparkle.style.opacity = '0.7';
+        sparkle.style.pointerEvents = 'none';
+        sparkle.style.animation = 'float 2s linear forwards';
+        document.body.appendChild(sparkle);
+        setTimeout(() => sparkle.remove(), 2000);
+    }
+}, 800);
+
+setTimeout(() => createHearts(), 1000);
+</script>
+
+</body>
+</html>
